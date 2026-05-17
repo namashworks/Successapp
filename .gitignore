@@ -1,0 +1,71 @@
+# ============================================================================
+# SuccessApp — top-level .gitignore
+# Anything here NEVER gets committed. Run `git status` before pushing to verify.
+# ============================================================================
+
+# --- Secrets — NEVER commit these ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+kaggle.json
+credentials.json
+client_secret*.json
+service-account*.json
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Gradio / runtime artifacts ---
+.gradio/
+flagged/
+gradio_cached_examples/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Model files — way too big for git, plus license-restricted ---
+*.task
+*.tflite
+*.litertlm
+*.safetensors
+*.bin
+*.gguf
+mobile_app/android/app/src/main/assets/models/
+_archived/mobile_app/android/app/src/main/assets/models/
+
+# --- Flutter build artifacts (kept in _archived but build dirs grow huge) ---
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+
+# --- Local working scratch files ---
+*.bak
+*~
+_scratch/
+scratch/
+
+# --- Logs ---
+*.log

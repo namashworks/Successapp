@@ -1,0 +1,126 @@
+{
+  "$schema_version": "1.0.0",
+  "tools": [
+    {
+      "name": "create_goal_graph",
+      "description": "Create a directed-acyclic goal-decomposition graph for a long-term aspiration the user has expressed. Call this when the user names a concrete goal (job, fitness target, skill, habit, relationship outcome, financial target).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "goal": {
+            "type": "string",
+            "description": "The user-facing goal title, in the user's own framing. 3-10 words."
+          },
+          "horizon_days": {
+            "type": "integer",
+            "description": "Estimated total days to reach the goal. Use realistic ranges: skill 30-180, fitness 60-365, job 30-180, habit 21-90.",
+            "minimum": 7,
+            "maximum": 730
+          },
+          "nodes": {
+            "type": "array",
+            "description": "3-7 milestone nodes. Keep it small enough to be readable on a phone screen.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string", "description": "Short id like n1, n2"},
+                "task": {"type": "string", "description": "Concrete actionable milestone, 3-8 words"},
+                "duration_days": {"type": "integer", "minimum": 1, "maximum": 180},
+                "success_metric": {"type": "string", "description": "Observable proof this milestone is met"}
+              },
+              "required": ["id", "task", "duration_days", "success_metric"]
+            },
+            "minItems": 3,
+            "maxItems": 7
+          },
+          "edges": {
+            "type": "array",
+            "description": "Dependency pairs [from_id, to_id]. Use to express ordering. Can be empty if all nodes are independent.",
+            "items": {
+              "type": "array",
+              "items": {"type": "string"},
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
+        },
+        "required": ["goal", "horizon_days", "nodes", "edges"]
+      }
+    },
+    {
+      "name": "save_journal_entry",
+      "description": "Write a one-page structured journal entry summarising the session. Call this at the end of a conversation, or when the user explicitly asks to journal.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "date": {"type": "string", "description": "ISO date YYYY-MM-DD"},
+          "mood_score": {
+            "type": "integer",
+            "description": "Subjective mood on a 1-10 scale inferred from the conversation tone (1=very low, 10=excellent).",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "key_themes": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "2-5 short noun phrases capturing what the conversation was about."
+          },
+          "wins": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Positive moments or progress the user mentioned. Can be empty."
+          },
+          "concerns": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Worries, stressors, or low-mood signals the user mentioned. Can be empty."
+          },
+          "goal_progress_notes": {
+            "type": "string",
+            "description": "Free-text note on any movement (or stuckness) on the user's active goals. Empty string if not applicable."
+          },
+          "reflection_prompt_for_tomorrow": {
+            "type": "string",
+            "description": "ONE short gentle question (under 20 words) the app can show the user tomorrow."
+          }
+        },
+        "required": ["date", "mood_score", "key_themes", "wins", "concerns", "goal_progress_notes", "reflection_prompt_for_tomorrow"]
+      }
+    },
+    {
+      "name": "schedule_reminder",
+      "description": "Schedule a local on-device reminder tied to a goal node or a self-care action. Call this only when the user explicitly agrees to a reminder, or when they ask for one.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "title": {"type": "string", "description": "Short notification title, under 40 chars"},
+          "body": {"type": "string", "description": "Notification body, under 120 chars, warm and specific"},
+          "trigger": {
+            "type": "object",
+            "properties": {
+              "kind": {"type": "string", "enum": ["daily", "weekly", "once"], "description": "Recurrence"},
+              "time_local": {"type": "string", "description": "HH:MM 24h local time"},
+              "weekday": {"type": "string", "enum": ["mon","tue","wed","thu","fri","sat","sun"], "description": "Only for weekly"},
+              "date_iso": {"type": "string", "description": "Only for once: YYYY-MM-DD"}
+            },
+            "required": ["kind", "time_local"]
+          },
+          "linked_goal_node_id": {"type": "string", "description": "Optional id of a node in a goal graph this reminder is for"}
+        },
+        "required": ["title", "body", "trigger"]
+      }
+    },
+    {
+      "name": "show_crisis_resources",
+      "description": "MUST be called whenever a triage turn produces crisis_flag=true. Surfaces hotlines and grounding actions to the user. Never reasons about the situation, just calls this tool.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "region_hint": {"type": "string", "description": "ISO country code if known from user, otherwise 'unknown'"},
+          "category": {"type": "string", "enum": ["suicidal_ideation", "self_harm", "active_violence", "psychosis", "other"]}
+        },
+        "required": ["category"]
+      }
+    }
+  ]
+}
