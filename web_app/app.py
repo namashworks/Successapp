@@ -468,6 +468,8 @@ def reset_session(state: dict):
         "",                              # photo_info
         None,                            # trends_plot
         "",                              # trends_summary
+        None,                            # export_file — clear stale download card
+        "_No import yet._",              # import_status — clear stale status
     )
 
 
@@ -718,7 +720,8 @@ Different visitors of this page get fully isolated localStorage. There is no sha
             reset_session,
             [state],
             [state, chatbot, msg, meta, goal_plot, goal_summary,
-             journal_view, photo_info, trends_plot, trends_summary],
+             journal_view, photo_info, trends_plot, trends_summary,
+             export_file, import_status],
         )
 
         # The Forget button on the About tab uses the same handler with the same outputs.
@@ -726,7 +729,8 @@ Different visitors of this page get fully isolated localStorage. There is no sha
             reset_session,
             [state],
             [state, chatbot, msg, meta, goal_plot, goal_summary,
-             journal_view, photo_info, trends_plot, trends_summary],
+             journal_view, photo_info, trends_plot, trends_summary,
+             export_file, import_status],
         )
 
         # Export: produces a JSON file path; gr.File handles the browser download.
