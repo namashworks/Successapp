@@ -758,6 +758,12 @@ if __name__ == "__main__":
     print(f"Using model: {gemma_client.model_name()}")
     demo = build_ui()
     # show_api=False disables the auto API-docs page (and the schema introspection
-    # that trips the gradio_client bug). 127.0.0.1 is local-only — avoids Windows
-    # "localhost not accessible" check failures that hit when binding to 0.0.0.0.
-    demo.launch(share=False, server_name="127.0.0.1", server_port=7860, show_api=False)
+    # that trips the gradio_client bug).
+    #
+    # server_name: HF Spaces sets the SPACE_ID env var when the app runs in a Space.
+    # On Spaces we MUST bind 0.0.0.0 so HF's reverse proxy can reach us. Locally on
+    # Windows binding to 0.0.0.0 sometimes trips Gradio's "localhost not accessible"
+    # check, so we fall back to 127.0.0.1 there.
+    on_hf_spaces = bool(os.environ.get("SPACE_ID"))
+    server_name = "0.0.0.0" if on_hf_spaces else "127.0.0.1"
+    demo.launch(share=False, server_name=server_name, server_port=7860, show_api=False)
