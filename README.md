@@ -2,7 +2,7 @@
 
 **Submission for [The Gemma 4 Good Hackathon](https://www.kaggle.com/competitions/gemma-4-good-hackathon) · Health track**
 
-🟢 **Live demo:** _<HF Spaces URL — added at submission>_
+🟢 **Live demo:** _https://huggingface.co/spaces/blousy/successapp_
 📹 **90s video:** _<YouTube URL — added at submission>_
 📓 **Notebooks:** Colab links in `colab_notebooks/`
 

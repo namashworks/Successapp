@@ -6,7 +6,7 @@
 
 | Live demo | Video (90 sec) | Code |
 |-----------|----------------|------|
-| _<HF Spaces URL>_ | _<YouTube URL>_ | _https://github.com/namashworks/Successapp_ |
+| _https://huggingface.co/spaces/blousy/successapp_ | _<YouTube URL>_ | _https://github.com/namashworks/Successapp_ |
 
 > ✅ **35 / 35 safety eval pass** — including 10 adversarial crisis scenarios.
 > 🔒 **Zero server-side storage.** Your conversations, goals, journal, mood trends live only in your browser.
