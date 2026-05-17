@@ -1,6 +1,10 @@
-# SuccessApp — Architecture
+# SuccessApp — Architecture (archived Flutter path)
 
-## Runtime data flow
+> ⚠️ **This document describes the on-device Flutter + MediaPipe LLM Inference architecture in `_archived/mobile_app/`.**
+> That codebase is parked behind a known MediaPipe tooling gap (Gemma 4 quantization not yet supported) — see the writeup Section 10.
+> **For the live shipping architecture (Gradio web app + Google AI Studio API), see [`docs/submission_writeup.md`](submission_writeup.md) Section 4 and the architecture diagram in the root [`README.md`](../README.md).**
+
+## Runtime data flow (Flutter / on-device)
 
 ```
 USER TYPES MESSAGE
