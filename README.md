@@ -1,6 +1,6 @@
 # SuccessApp — A private, safety-first wellbeing companion powered by Gemma 4
 
-**Submission for [The Gemma 4 Good Hackathon](https://www.kaggle.com/competitions/gemma-4-good-hackathon) · Health track**
+**Submission for [The Gemma 4 Good Hackathon](https://www.kaggle.com/competitions/gemma-4-good-hackathon)**
 
 🟢 **Live demo:** _https://huggingface.co/spaces/blousy/successapp_
 📹 **90s video:** _<YouTube URL — added at submission>_
