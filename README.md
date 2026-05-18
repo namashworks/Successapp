@@ -3,7 +3,7 @@
 **Submission for [The Gemma 4 Good Hackathon](https://www.kaggle.com/competitions/gemma-4-good-hackathon)**
 
 🟢 **Live demo:** _https://huggingface.co/spaces/blousy/successapp_
-📹 **90s video:** _<YouTube URL — added at submission>_
+📹 **90s video:** _https://www.youtube.com/watch?v=8qntAP_-jMQ_
 📓 **Notebooks:** Colab links in `colab_notebooks/`
 
 > ✅ **35 / 35 safety eval pass** — 10 crisis cases, 8 adversarial, 17 normal/edge
